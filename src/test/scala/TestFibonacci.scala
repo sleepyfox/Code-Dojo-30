@@ -39,6 +39,9 @@ class TestFibonacci extends FunSpec with ShouldMatchers {
     it("should transform 1 into '1'") {
       fibonacciEncode(1) should be("1")
     }
+    it("should transform 2 into '10'") {
+      fibonacciEncode(2) should be("10")
+    }
   }
 
   def fibonacciEncode(number: Int) : String = {
