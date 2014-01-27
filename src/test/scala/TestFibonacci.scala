@@ -26,6 +26,7 @@ class TestFibonacci extends FunSpec with ShouldMatchers {
   }
 
   def fibonacci(index: Int) : Int = index match {
+    case x if x < 0 => throw new IndexOutOfBoundsException
     case 0 => 0
     case 1 => 1
     case x => fibonacci(x - 1) + fibonacci(x - 2)
