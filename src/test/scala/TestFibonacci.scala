@@ -15,6 +15,14 @@ class TestFibonacci extends FunSpec with ShouldMatchers {
     it("should have 2 as its fourth number") {
       fibonacci(3) should be(2)
     }
+    it("should have 34 as its tenth number") {
+      fibonacci(9) should be(34)
+    }
+    it("should throw an exception on negative input") {
+      intercept[IndexOutOfBoundsException] {
+        fibonacci(-1)
+      }
+    }
   }
 
   def fibonacci(index: Int) : Int = index match {
