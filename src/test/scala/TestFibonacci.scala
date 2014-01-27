@@ -4,28 +4,22 @@ class TestFibonacci extends FunSpec with ShouldMatchers {
 
   describe("A Fibonacci sequence") {
     it("should have zero as its first number") {
-      getNumber(0) should be(0)
+      fibonacci(0) should be(0)
     }
     it("should have one as its second number") {
-      getNumber(1) should be(1)
+      fibonacci(1) should be(1)
     }
     it("should have 1 as its third number") {
-      getNumber(2) should be(1)
+      fibonacci(2) should be(1)
     }
     it("should have 2 as its fourth number") {
-      getNumber(3) should be(2)
+      fibonacci(3) should be(2)
     }
   }
 
-  def getNumber(index: Int) : Int = {
-    if (index == 0) {
-      0
-    } else {
-      if (index == 1 || index == 2) {
-        1
-      } else {
-        2
-      }
-    }
+  def fibonacci(index: Int) : Int = index match {
+    case 0 => 0
+    case 1 => 1
+    case x => fibonacci(x - 1) + fibonacci(x - 2)
   }
 }
