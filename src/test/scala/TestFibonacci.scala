@@ -12,6 +12,9 @@ class TestFibonacci extends FunSpec with ShouldMatchers {
     it("should have 1 as its third number") {
       getNumber(2) should be(1)
     }
+    it("should have 2 as its fourth number") {
+      getNumber(3) should be(2)
+    }
   }
 
   def getNumber(index: Int) : Int = {
