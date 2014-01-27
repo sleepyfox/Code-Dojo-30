@@ -34,7 +34,11 @@ class TestFibonacci extends FunSpec with ShouldMatchers {
 
   describe("A Fibonacci encoder") {
     it("should transform 0 into 0") {
-      fibonacciEncode(0) should be(0)
+      fibonacciEncode(0) should be("0")
     }
+  }
+
+  def fibonacciEncode(number: Int) : String = {
+    "0"
   }
 }
