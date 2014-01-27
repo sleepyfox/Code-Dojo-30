@@ -21,7 +21,11 @@ class TestFibonacci extends FunSpec with ShouldMatchers {
     if (index == 0) {
       0
     } else {
-      1
+      if (index == 1 || index == 2) {
+        1
+      } else {
+        2
+      }
     }
   }
 }
