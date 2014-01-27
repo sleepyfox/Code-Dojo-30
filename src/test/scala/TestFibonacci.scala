@@ -42,6 +42,6 @@ class TestFibonacci extends FunSpec with ShouldMatchers {
   }
 
   def fibonacciEncode(number: Int) : String = {
-    "0"
+    s"$number"
   }
 }
