@@ -31,4 +31,10 @@ class TestFibonacci extends FunSpec with ShouldMatchers {
     case 1 => 1
     case x => fibonacci(x - 1) + fibonacci(x - 2)
   }
+
+  describe("A Fibonacci encoder") {
+    it("should transform 0 into 0") {
+      fibonacciEncode(0) should be(0)
+    }
+  }
 }
