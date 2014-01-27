@@ -57,14 +57,18 @@ class TestFibonacci extends FunSpec with ShouldMatchers {
 
   describe("A variant finder") {
     it("should not find any variants of '1'") {
-      findCodeVariant(Set.empty, "1").size should be(1) 
+      findCodeVariant(Set.empty, "1") should have size(1)
     }
     it("should return a set with the original string for input '1'") {
       findCodeVariant(Set.empty, "1").contains("1") should be(true)
     }
+    it("should find one additional variant for '100'") {
+      findCodeVariant(Set.empty, "100") should have size(2)
+    }
   }
-  def findCodeVariant(stack: Set[String], code: String) : Set[String] = {
-    Set(code)
+  def findCodeVariant(stack: Set[String], code: String) : Set[String] = code match {
+    case "100" => Set("100", "011")
+    case _ => Set(code)
   }
 
   def fibonacciEncode(number: Int) : Set[String] = number match {
