@@ -34,21 +34,25 @@ class TestFibonacci extends FunSpec with ShouldMatchers {
 
   describe("A Fibonacci encoder") {
     it("should transform 0 into '0'") {
-      fibonacciEncode(0) should be("0")
+      fibonacciEncode(0) should be(Set("0"))
     }
     it("should transform 1 into '1'") {
-      fibonacciEncode(1) should be("1")
+      fibonacciEncode(1) should be(Set("1"))
     }
     it("should transform 2 into '10'") {
-      fibonacciEncode(2) should be("10")
+      fibonacciEncode(2) should be(Set("10"))
     }
+    it("should transform 3 into either '11' or '100'") {
+      fibonacciEncode(3) should be(Set("11", "100"))
+    }
+
   }
 
-  def fibonacciEncode(number: Int) : String = {
+  def fibonacciEncode(number: Int) : Set[String] = {
     if (number == 2) {
-      "10"
+      Set("10")
     } else {
-      s"$number"
+      Set(s"$number")
     }
   }
 }
