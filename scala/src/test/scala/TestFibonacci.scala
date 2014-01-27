@@ -42,17 +42,38 @@ class TestFibonacci extends FunSpec with ShouldMatchers {
     it("should transform 2 into '10'") {
       fibonacciEncode(2) should be(Set("10"))
     }
-    it("should transform 3 into either '11' or '100'") {
-      fibonacciEncode(3) should be(Set("11", "100"))
+    it("should transform 3 into a set that includes '100'") {
+      fibonacciEncode(3).contains("100") should be(true)
     }
-
   }
 
-  def fibonacciEncode(number: Int) : Set[String] = {
-    if (number == 2) {
-      Set("10")
-    } else {
-      Set(s"$number")
+  // 0, 1, 1, 2, 3, 5
+  // 1, 2, 3, 5
+  // 0 0 0 1
+
+  def fibonacciEncode(number: Int) : Set[String] = number match {
+    case 0 => Set(number.toString)
+    case 1 => Set(number.toString)
+    case _ => {
+      var index = 2
+      var code = ""
+      var remainder = number
+
+      while(fibonacci(index) <= number) {
+        index += 1
+      }
+
+      (index-1 until 1 by -1).foreach { currentIndex => {
+        if(remainder >= fibonacci(currentIndex)){
+          code += "1"
+          remainder -= fibonacci(currentIndex)
+        } else {
+          code += "0"
+        }
+      }}
+
+      Set(code)
     }
+    // loop from 1 to index-1 and return string
   }
 }
