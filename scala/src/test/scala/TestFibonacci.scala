@@ -139,9 +139,20 @@ class TestFibonacci extends FunSpec with ShouldMatchers {
     it("should not filter out 0") {
       isZeckendorf("0") should be(true)
     }
+
+    describe("with an empty string") {
+      it("should throw IllegalArgumentException") {
+        intercept[IllegalArgumentException] {
+          isZeckendorf("")
+        }
+      }
+    }
   }
 
   def isZeckendorf(code : String) : Boolean = {
-    true
+    if (code.isEmpty) 
+      throw new IllegalArgumentException
+    else
+      true
   }
 }
