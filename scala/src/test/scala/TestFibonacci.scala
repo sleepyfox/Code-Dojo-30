@@ -147,10 +147,17 @@ class TestFibonacci extends FunSpec with ShouldMatchers {
         }
       }
     }
+    describe("with a non-binary string") {
+      it("'Hi!' should throw IllegalArgumentException") {
+        intercept[IllegalArgumentException] {
+          isZeckendorf("Hi!010101")
+        }
+      }
+    }
   }
 
   def isZeckendorf(code : String) : Boolean = {
-    if (code.isEmpty) 
+    if (code.isEmpty || !code.matches("[01]+"))
       throw new IllegalArgumentException
     else
       true
