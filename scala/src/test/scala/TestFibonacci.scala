@@ -150,7 +150,12 @@ class TestFibonacci extends FunSpec with ShouldMatchers {
     describe("with a non-binary string") {
       it("'Hi!' should throw IllegalArgumentException") {
         intercept[IllegalArgumentException] {
-          isZeckendorf("Hi!010101")
+          isZeckendorf("Hi!")
+        }
+      }
+      it("'Hi!0101' should throw IllegalArgumentException") {
+        intercept[IllegalArgumentException] {
+          isZeckendorf("Hi!0101")
         }
       }
     }
