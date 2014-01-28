@@ -131,4 +131,17 @@ class TestFibonacci extends FunSpec with ShouldMatchers {
     }
     // loop from 1 to index-1 and return string
   }
+
+  describe("A Zeckendorf filter") {
+    it("should not filter out 1") {
+      isZeckendorf("1") should be(true)
+    }
+    it("should not filter out 0") {
+      isZeckendorf("0") should be(true)
+    }
+  }
+
+  def isZeckendorf(code : String) : Boolean = {
+    true
+  }
 }
