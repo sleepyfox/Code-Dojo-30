@@ -46,7 +46,6 @@ class TestFibonacci extends FunSpec with ShouldMatchers {
       fibonacciEncode(3).contains("100") should be(true)
     }
     it("should transform 3 into a set that includes '11'") {
-      pending
       fibonacciEncode(3).contains("11") should be(true)
     }
   }
@@ -78,15 +77,20 @@ class TestFibonacci extends FunSpec with ShouldMatchers {
       findCodeVariant(Set.empty, "10000") should have size(3)
     }
   }
-  def findCodeVariant(stack: Set[String], code: String) : Set[String] = {
-    if (stack.isEmpty) {
-      findCodeVariant(stack + code, code)
-    } else {
-      var newCode = code.replaceFirst("100", "011")
-      if (newCode(0) == '0') newCode = newCode.drop(1)
-      if (code == newCode) {
+
+  def findCodeVariant(stack: Set[String], code: String) : Set[String] = stack match {
+    case x if x.isEmpty => findCodeVariant(Set(code), code)
+    case _ => {
+      if (!code.contains("100")) {
         return stack
       } else {
+        //add new variant and recurse
+        var newCode : String = ""
+        if (code.indexOf("100") == 0) {
+          newCode = code.replaceFirst("100", "11")
+        } else {
+          newCode = code.replaceFirst("100", "011")
+        }
         findCodeVariant(stack + newCode, newCode)
       }
     }
