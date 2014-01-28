@@ -89,12 +89,13 @@ class TestFibonacci extends FunSpec with ShouldMatchers {
         }
       }
 
-      if (!code.contains("100")) {
-        return stack
-      } else {
-        //add new variant and recurse
+      def hasVariant(code : String) : Boolean = code.contains("100")
+
+      if (hasVariant(code)) {
         val newCode = produceSingleVariant(code)
         findCodeVariants(stack + newCode, newCode)
+      } else {
+        stack
       }
     }
   }
