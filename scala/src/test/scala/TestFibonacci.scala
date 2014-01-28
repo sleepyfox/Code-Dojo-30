@@ -56,42 +56,45 @@ class TestFibonacci extends FunSpec with ShouldMatchers {
 
   describe("A variant finder") {
     it("should not find any variants of '1'") {
-      findCodeVariant(Set.empty, "1") should have size(1)
+      findCodeVariants(Set.empty, "1") should have size(1)
     }
     it("should return a set with the original string for input '1'") {
-      findCodeVariant(Set.empty, "1").contains("1") should be(true)
+      findCodeVariants(Set.empty, "1").contains("1") should be(true)
     }
     it("should find one additional variant for '100'") {
-      findCodeVariant(Set.empty, "100") should have size(2)
+      findCodeVariants(Set.empty, "100") should have size(2)
     }
     it("should find no additional variants for '101'") {
-      findCodeVariant(Set.empty, "101") should have size(1)
+      findCodeVariants(Set.empty, "101") should have size(1)
     }
     it("should find one additional variants for '1000'") {
-      findCodeVariant(Set.empty, "1000") should have size(2)
+      findCodeVariants(Set.empty, "1000") should have size(2)
     }
     it("should find additional variant '110' for '1000'") {
-      findCodeVariant(Set.empty, "1000").contains("110") should be(true)
+      findCodeVariants(Set.empty, "1000").contains("110") should be(true)
     }
     it("should find 2 additional variants for '10000'") {
-      findCodeVariant(Set.empty, "10000") should have size(3)
+      findCodeVariants(Set.empty, "10000") should have size(3)
     }
   }
 
-  def findCodeVariant(stack: Set[String], code: String) : Set[String] = stack match {
-    case x if x.isEmpty => findCodeVariant(Set(code), code)
+  def findCodeVariants(stack: Set[String], code: String) : Set[String] = stack match {
+    case x if x.isEmpty => findCodeVariants(Set(code), code)
     case _ => {
+      def produceSingleVariant(code: String) : String = {
+        if (code.startsWith("100")) {
+          code.replaceFirst("100", "11")
+        } else {
+          code.replaceFirst("100", "011")
+        }
+      }
+
       if (!code.contains("100")) {
         return stack
       } else {
         //add new variant and recurse
-        var newCode : String = ""
-        if (code.indexOf("100") == 0) {
-          newCode = code.replaceFirst("100", "11")
-        } else {
-          newCode = code.replaceFirst("100", "011")
-        }
-        findCodeVariant(stack + newCode, newCode)
+        val newCode = produceSingleVariant(code)
+        findCodeVariants(stack + newCode, newCode)
       }
     }
   }
@@ -117,7 +120,7 @@ class TestFibonacci extends FunSpec with ShouldMatchers {
         }
       }}
 
-      findCodeVariant(Set.empty, code)
+      findCodeVariants(Set.empty, code)
     }
     // loop from 1 to index-1 and return string
   }
