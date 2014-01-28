@@ -76,6 +76,12 @@ class TestFibonacci extends FunSpec with ShouldMatchers {
     it("should find 2 additional variants for '10000'") {
       findCodeVariants(Set.empty, "10000") should have size(3)
     }
+    it("should find variant for '10000' of '1100'") {
+      findCodeVariants(Set.empty, "10000").contains("1100") should be(true)
+    }
+    it("should find variant for '10000' of '1011'") {
+      findCodeVariants(Set.empty, "10000").contains("1011") should be(true)
+    }
   }
 
   def findCodeVariants(stack: Set[String], code: String) : Set[String] = stack match {
