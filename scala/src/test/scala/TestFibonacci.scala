@@ -133,11 +133,14 @@ class TestFibonacci extends FunSpec with ShouldMatchers {
   }
 
   describe("A Zeckendorf filter") {
-    it("should not filter out 1") {
+    it("should not filter out '1'") {
       isZeckendorf("1") should be(true)
     }
-    it("should not filter out 0") {
+    it("should not filter out '0'") {
       isZeckendorf("0") should be(true)
+    }
+    it("should filter out '11'") {
+      isZeckendorf("11") should be(false)
     }
 
     describe("with an empty string") {
@@ -165,6 +168,9 @@ class TestFibonacci extends FunSpec with ShouldMatchers {
     if (code.isEmpty || !code.matches("[01]+"))
       throw new IllegalArgumentException
     else
-      true
+      if (code.contains("11"))
+        false
+      else
+        true
   }
 }
