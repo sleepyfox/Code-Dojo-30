@@ -30,30 +30,36 @@ package codedojo {
       }
     }
 
+    private def biggestFibonacciIndex(number: Int) : Int = {
+      var index = 2
+      while(fibonacci(index) <= number) index += 1
+      index - 2
+    }
+
+    private def makeCodeList(rep : List[Int], remainder : Int, digit : Int) : List[Int] = remainder match {
+      case 0 => return rep
+      case _ => {
+        var newRemainder = remainder
+        var newRep = rep
+        if (remainder >= fibonacci(digit)) {
+          newRemainder = newRemainder - fibonacci(digit)
+          newRep = rep.updated((rep.length - 1 - digit), 1)
+        }
+        makeCodeList(newRep, newRemainder, digit - 1)
+      }
+    }
+
+    private def principalCode(number: Int) : String = {
+      val index = biggestFibonacciIndex(number)
+      makeCodeList(List.fill(index)(0), number, index).mkString
+    }
+
     def fibonacciEncode(number: Int) : Set[String] = number match {
       case 0 => Set(number.toString)
       case 1 => Set(number.toString)
       case _ => {
-        var index = 2
-        var code = ""
-        var remainder = number
-
-        while(fibonacci(index) <= number) {
-          index += 1
-        }
-
-        (index-1 until 1 by -1).foreach { currentIndex => {
-          if(remainder >= fibonacci(currentIndex)){
-            code += "1"
-            remainder -= fibonacci(currentIndex)
-          } else {
-            code += "0"
-          }
-        }}
-
-        findCodeVariants(Set.empty, code)
+        findCodeVariants(Set.empty, principalCode(number))
       }
-      // loop from 1 to index-1 and return string
     }
 
     def isZeckendorf(code : String) : Boolean = code match {

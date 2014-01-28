@@ -125,8 +125,8 @@ class TestFibonacci extends FunSpec with ShouldMatchers {
     }
   }
 
-  (0 to 20).map( x => {
-    println(x, fibonacciEncode(x).filter(isZeckendorf))
-  })
+  // (0 to 20).map( x => {
+  //   println(x, fibonacciEncode(x).filter(isZeckendorf))
+  // })
 
 }
