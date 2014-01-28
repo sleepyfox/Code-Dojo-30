@@ -109,4 +109,24 @@ class TestFibonacci extends FunSpec with ShouldMatchers {
       }
     }
   }
+
+  describe("The Zeckendorf representations for") {
+    it("1 should be '1' only") {
+      fibonacciEncode(1).filter(isZeckendorf) should be(Set("1"))
+    }
+    it("2 should be '10' only") {
+      fibonacciEncode(2).filter(isZeckendorf) should be(Set("10"))
+    }
+    it("3 should be '100' only and not '11'") {
+      fibonacciEncode(3).filter(isZeckendorf) should be(Set("100"))
+    }
+    it("8 should be '10000' only and not '1100' or '1011'") {
+      fibonacciEncode(8).filter(isZeckendorf) should be(Set("10000"))
+    }
+  }
+
+  (0 to 20).map( x => {
+    println(x, fibonacciEncode(x).filter(isZeckendorf))
+  })
+
 }
