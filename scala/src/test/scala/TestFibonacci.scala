@@ -164,13 +164,10 @@ class TestFibonacci extends FunSpec with ShouldMatchers {
     }
   }
 
-  def isZeckendorf(code : String) : Boolean = {
-    if (code.isEmpty || !code.matches("[01]+"))
-      throw new IllegalArgumentException
-    else
-      if (code.contains("11"))
-        false
-      else
-        true
+  def isZeckendorf(code : String) : Boolean = code match {
+    case ""                       => throw new IllegalArgumentException
+    case x if !x.matches("[01]+") => throw new IllegalArgumentException
+    case x if x.contains("11")    => false
+    case _                        => true
   }
 }
